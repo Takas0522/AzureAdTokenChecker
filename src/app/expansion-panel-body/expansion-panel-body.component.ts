@@ -56,9 +56,13 @@ export class ExpansionPanelBodyComponent implements OnInit {
 
   getToken() {
     this.acquireGetToken = '';
-    this.adalService.acquireToken(this.application.clientId).subscribe(x => {
-      this.acquireGetToken = x;
-    });
+    if (this.adalService.userInfo.authenticated) {
+      this.adalService.acquireToken(this.application.clientId).subscribe(x => {
+        this.acquireGetToken = x;
+      });
+    } else {
+      this.adalService.login();
+    }
   }
 
   copyToken() {

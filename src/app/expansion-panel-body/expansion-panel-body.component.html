@@ -1,0 +1,38 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{application.applicationName}}
+    </mat-panel-title>
+    <mat-panel-description>
+      <button mat-button (click)="getToken()">
+        Get Token
+      </button>
+      <button mat-button (click)="copyToken()"
+        [disabled]="!isAuthenticated && !applicationTokenInfo">
+        <mat-icon>
+          filter_none
+        </mat-icon>
+        Copy Token
+      </button>
+      <label class="token">
+        {{applicationTokenInfo}}
+      </label>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div>
+    <mat-form-field>
+      <input matInput [(ngModel)]="application.tenantName" placeholder="Tenant Name" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput [(ngModel)]="application.clientId" placeholder="Client Id" />
+    </mat-form-field>
+  </div>
+  <div>
+    Token: {{applicationTokenInfo}}
+  </div>
+  <mat-action-row>
+    <button (click)="updateApplicationInfo()" mat-button color="primary">Update</button>
+  </mat-action-row>
+</mat-expansion-panel>

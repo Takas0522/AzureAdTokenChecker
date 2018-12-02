@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <mat-toolbar-row>
+    Azure AD Token Checker
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="contents">
+  <button (click) = "dataAdd()" mat-raised-button>
+    Add Applciation
+  </button>
+  <h1>Azure AD Application List</h1>
+  <div class="ad-app-list">
+    <mat-accordion>
+      <ng-template ngFor let-application [ngForOf]="applciationDatas">
+        <app-expansion-panel-body
+          [application]="application"
+          (update)="updateApplicationInfo()"
+        ></app-expansion-panel-body>
+      </ng-template>
+    </mat-accordion>
+  </div>
+</div>

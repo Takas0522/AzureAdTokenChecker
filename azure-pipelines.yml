@@ -30,6 +30,8 @@ steps:
   displayName: 'Archive dist\AzureAdTokenChecker'
   inputs:
     rootFolderOrFile: 'dist\AzureAdTokenChecker'
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)/drop.zip'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'

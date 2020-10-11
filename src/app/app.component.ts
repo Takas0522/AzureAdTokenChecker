@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MsalService as MsalService } from './services/msal.service';
+import { ClientRegisterComponent } from './components/client-register/client-register.component';
+import { AuthSetting } from './models/auth-settings';
 import { AppService } from './app.service';
 
 @Component({
@@ -11,30 +13,37 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private dialog: MatDialog,
+    private matDialog: MatDialog,
     private service: AppService
   ) {}
 
-  get applciationDatas() {
-    return this.service.applciationDatas;
+  get settings(): AuthSetting[] {
+    return this.service.datas;
   }
 
-  ngOnInit() {
-    this.service.applicationInit();
-  }
+  ngOnInit(): void {}
 
-  dataAdd() {
-    const dialog = this.dialog.open(DialogBodyComponent, {
-      width: '80%'
-    });
-    dialog.afterClosed().subscribe(res => {
-      if (res) {
-        this.service.setApplicationData(res);
+  addSetting(): void {
+    const ref = this.matDialog.open(ClientRegisterComponent, { width: '30vw' });
+    ref.afterClosed().subscribe(res => {
+      if (typeof(res) !== 'undefined' && res.action === 'register') {
+        this.service.saveData(res.value);
       }
     });
   }
 
-  updateApplicationInfo() {
-    this.service.updateApplicationData();
+  editSetting(index: number): void {
+    const editData = this.settings.filter(f => f.index === index)[0];
+    const ref = this.matDialog.open(ClientRegisterComponent, { data: editData, width: '30vw' });
+    ref.afterClosed().subscribe(res => {
+      if (typeof(res) !== 'undefined' && res.action === 'register') {
+        this.service.saveData(res.value);
+        return;
+      }
+      if (typeof(res) !== 'undefined' && res.action === 'delete') {
+        this.service.deleteData(index);
+        return;
+      }
+    });
   }
 }

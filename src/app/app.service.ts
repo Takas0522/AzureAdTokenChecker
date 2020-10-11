@@ -56,6 +56,7 @@ export class AppService {
         newArray.forEach((f, i) => {
             f.index = i;
         });
+        this._datas = newArray;
         this.saveLocalStorge();
     }
 

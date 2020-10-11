@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MsalService as MsalService } from './services/msal.service';
+import { ClientRegisterComponent } from './components/client-register/client-register.component';
+import { AuthSetting } from './models/auth-settings';
 import { AppService } from './app.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,30 +14,28 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private dialog: MatDialog,
-    private service: AppService
+    private matDialog: MatDialog,
+    private service: AppService,
+    private cd: ChangeDetectorRef
   ) {}
 
-  get applciationDatas() {
-    return this.service.applciationDatas;
-  }
+  settings: AuthSetting[] = [];
 
-  ngOnInit() {
-    this.service.applicationInit();
-  }
-
-  dataAdd() {
-    const dialog = this.dialog.open(DialogBodyComponent, {
-      width: '80%'
+  ngOnInit(): void {
+    this.service.datas.subscribe(s => {
+      this.settings = s.map(m => {
+        return new AuthSetting(m);
+      });
+      this.cd.detectChanges();
     });
-    dialog.afterClosed().subscribe(res => {
-      if (res) {
-        this.service.setApplicationData(res);
+  }
+
+  addSetting(): void {
+    const ref = this.matDialog.open(ClientRegisterComponent, { width: '30vw' });
+    ref.afterClosed().subscribe(res => {
+      if (typeof(res) !== 'undefined' && res.action === 'register') {
+        this.service.saveData(res.value);
       }
     });
-  }
-
-  updateApplicationInfo() {
-    this.service.updateApplicationData();
   }
 }

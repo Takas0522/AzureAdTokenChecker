@@ -1,0 +1,24 @@
+.base-input {
+    mat-form-field {
+        width: 100%;
+    }
+}
+.footer {
+    margin-top: 5px;
+    text-align: right;
+    button {
+        width: 100px;
+    }
+    button:first-child {
+        margin-right: 5px;
+    }
+}
+.scope-filed {
+    button {
+        width: 80px;
+        margin-left: 5px;
+    }
+    mat-form-field {
+        width: calc(100% - 85px);
+    }
+}

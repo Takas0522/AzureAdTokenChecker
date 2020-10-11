@@ -3,29 +3,30 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { MaterialSummaryModule } from './material-summary/material-summary.module';
-import { DialogBodyComponent } from './dialog-body/dialog-body.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ExpansionPanelBodyComponent } from './expansion-panel-body/expansion-panel-body.component';
+import { ClientRegisterComponent } from './components/client-register/client-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { AuthSettingCardComponent } from './components/auth-setting-card/auth-setting-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogBodyComponent,
-    ExpansionPanelBodyComponent
+    ClientRegisterComponent,
+    AuthSettingCardComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialSummaryModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-  ],
-  entryComponents: [
-    DialogBodyComponent
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,40 @@
+<div class="contents">
+    <form [formGroup]="formGroup">
+        <div class="base-input">
+            <mat-form-field>
+                <input matInput formControlName="tenant" placeholder="TenantId" />
+            </mat-form-field>
+        </div>
+        <div class="base-input">
+            <mat-form-field>
+                <input matInput formControlName="clientId" placeholder="ClientId" />
+            </mat-form-field>
+        </div>
+        <div>
+            Scopes
+            <button mat-stroked-button (click)="addScopes()" color="primary">
+                +Add
+            </button>
+        </div>
+        <div formArrayName="scopes">
+            <ng-container *ngFor="let scope of scopes.controls; let i = index">
+                <div [formGroupName]="i" class="scope-filed">
+                    <mat-form-field>
+                        <input matInput formControlName="scope" />
+                    </mat-form-field>
+                    <button mat-flat-button color="warn" (click)="removeGroups(i)">
+                        -Delete
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+        <div class="footer">
+            <button mat-flat-button color="primary" (click)="register()">
+                Submit
+            </button>
+            <button mat-flat-button color="warn" [disabled]="isNewData" (click)="delete()">
+                Delete
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,32 +1,71 @@
-import { Injectable } from '@angular/core';
-import { IApplicationData } from './i-application-data';
+import { ApplicationRef, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthSetting } from './models/auth-settings';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AppService {
 
-  private _applicationDatas: IApplicationData[] = [];
-  get applciationDatas() {
-    return this._applicationDatas;
-  }
+    private readonly AUTH_SETTNGS_KEY = 'authSettings';
 
-  private readonly storgaeName = 'applicationdatas';
-
-  applicationInit() {
-    const datasSt: string = localStorage[this.storgaeName];
-    if (datasSt) {
-      this._applicationDatas = JSON.parse(datasSt);
+    private _datas: BehaviorSubject<AuthSetting[]> = new BehaviorSubject<AuthSetting[]>([]);
+    get datas(): Observable<AuthSetting[]> {
+        return this._datas.asObservable();
     }
-  }
 
-  setApplicationData(data: IApplicationData) {
-    this._applicationDatas.push(data);
-    this.updateApplicationData();
-  }
+    constructor() {
+        this.loadData();
+    }
 
-  updateApplicationData() {
-    const datasSt = JSON.stringify(this._applicationDatas);
-    localStorage[this.storgaeName] = datasSt;
-  }
+    loadData(): void {
+        const dataSt = localStorage.getItem(this.AUTH_SETTNGS_KEY);
+        if (dataSt && dataSt !== '') {
+            this._datas.next(JSON.parse(dataSt));
+        }
+    }
+
+    saveData(data: AuthSetting): void {
+        if (data.index === 0) {
+            if (this._datas.value == null || this._datas.value.length < 1) {
+                data.index = 1;
+                const nowValue = this._datas.value;
+                nowValue.push(data);
+                this._datas.next(nowValue);
+                this.saveLocalStorge();
+                return;
+            }
+            const idexs = this._datas.value.map(m => m.index);
+            const maxIndex = Math.max(...idexs);
+            if (maxIndex) {
+                data.index = maxIndex + 1;
+            }
+            const nowVal = this._datas.value;
+            nowVal.push(data);
+            this._datas.next(nowVal);
+        } else {
+            const editDatas = this._datas.value;
+            const editData = editDatas.filter(f => f.index === data.index);
+            editData[0].clientId = data.clientId;
+            editData[0].tenant = data.tenant;
+            editData[0].scopes = data.scopes;
+            this._datas.next(editDatas);
+        }
+        this.saveLocalStorge();
+    }
+
+    saveLocalStorge(): void {
+        const saveDataSt = JSON.stringify(this._datas.value);
+        localStorage.setItem(this.AUTH_SETTNGS_KEY, saveDataSt);
+    }
+
+    deleteData(index: number): void {
+        const newArray = this._datas.value.filter(f => f.index !== index);
+        newArray.forEach((f, i) => {
+            f.index = i;
+        });
+        this._datas.next(newArray);
+        this.saveLocalStorge();
+    }
+
 }

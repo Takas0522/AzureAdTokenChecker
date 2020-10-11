@@ -17,6 +17,13 @@ export class AuthSetting implements IAuthSetting {
     tenant = '';
     scopes: Scope[] = [];
 
+    constructor(data: IAuthSetting) {
+        this.index = data.index;
+        this.clientId = data.clientId;
+        this.tenant = data.tenant;
+        this.scopes = data.scopes;
+    }
+
     generateMsalSettings(): Configuration {
         return {
             auth: {

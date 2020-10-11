@@ -1,0 +1,20 @@
+.buttons-field {
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    button {
+        width: 100px;
+    }
+}
+.literal {
+    margin-top: 5px;
+    font-size: 80%;
+    font-weight: bold;
+}
+.value {
+    font-size: 120%;
+    padding-left: 10px;
+}
+.contents {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

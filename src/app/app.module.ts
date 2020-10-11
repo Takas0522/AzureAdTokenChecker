@@ -9,11 +9,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { AuthSettingCardComponent } from './components/auth-setting-card/auth-setting-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientRegisterComponent
+    ClientRegisterComponent,
+    AuthSettingCardComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

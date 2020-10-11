@@ -4,7 +4,6 @@
 
 <div>
     <ng-container *ngFor="let setting of settings">
-        {{setting.clientId}}
-        <button (click)="editSetting(setting.index)">EDIT</button>
+        <app-auth-setting-card [data]="setting"></app-auth-setting-card>
     </ng-container>
 </div>

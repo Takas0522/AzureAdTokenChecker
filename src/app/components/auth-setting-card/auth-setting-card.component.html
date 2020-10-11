@@ -1,0 +1,41 @@
+<div class="contents">
+    <mat-card>
+        <div class="literal">
+            ClientId
+        </div>
+        <div class="value">
+            {{data.clientId}}
+        </div>
+        <div class="literal">
+            Tenant
+        </div>
+        <div class="value">
+            {{data.tenant}}
+        </div>
+        <div class="literal">
+            Scopes
+        </div>
+        <div class="value">
+            {{scopes}}
+        </div>
+        <mat-card-actions>
+            <div class="buttons-field">
+                <div>
+                    <button mat-flat-button color="primary">
+                        LogIn
+                    </button>
+                </div>
+                <div>
+                    <button mat-flat-button color="primary">
+                        Get Token
+                    </button>
+                </div>
+                <div>
+                    <button mat-flat-button color="primary" (click)="editSetting()">
+                        Edit
+                    </button>
+                </div>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

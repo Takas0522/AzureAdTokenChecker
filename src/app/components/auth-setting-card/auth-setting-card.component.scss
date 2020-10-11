@@ -1,6 +1,6 @@
 .buttons-field {
     display: grid;
-    grid-template-columns: 110px 1fr 110px;
+    grid-template-columns: 1fr 110px;
     button {
         width: 100px;
     }
@@ -17,4 +17,7 @@
 .contents {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+.ac-token {
+    word-wrap: break-word;
 }

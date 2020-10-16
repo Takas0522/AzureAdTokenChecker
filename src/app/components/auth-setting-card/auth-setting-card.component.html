@@ -20,7 +20,7 @@
         </div>
         <mat-card-actions>
             <div class="buttons-field">
-                <div>
+                <div class="login">
                     <button mat-flat-button color="primary" (click)="login()" *ngIf="account == null">
                         LogIn
                     </button>
@@ -28,7 +28,18 @@
                         Get Token
                     </button>
                 </div>
-                <div>
+                <div class="scopes">
+                    <mat-form-field>
+                        <mat-select placeholder="SelectScopes">
+                            <ng-container *ngFor="let item of data.scopes">
+                                <mat-option [value]="item.scope">
+                                    {{item.scope}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="edit">
                     <button mat-flat-button color="primary" (click)="editSetting()">
                         Edit
                     </button>

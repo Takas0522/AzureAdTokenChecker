@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { AuthSettingCardComponent } from './components/auth-setting-card/auth-setting-card.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthSettingCardComponent } from './components/auth-setting-card/auth-se
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

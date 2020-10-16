@@ -1,9 +1,11 @@
-<button mat-button color="primary" (click)="addSetting()">
-    AddSetting
-</button>
+<div class="contents">
+    <button mat-raised-button color="primary" (click)="addSetting()">
+        AddSetting
+    </button>
 
-<div>
-    <ng-container *ngFor="let setting of settings">
-        <app-auth-setting-card [data]="setting"></app-auth-setting-card>
-    </ng-container>
+    <div>
+        <ng-container *ngFor="let setting of settings">
+            <app-auth-setting-card [data]="setting"></app-auth-setting-card>
+        </ng-container>
+    </div>
 </div>

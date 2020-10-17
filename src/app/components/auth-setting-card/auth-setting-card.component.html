@@ -51,7 +51,17 @@
                 Access Token:
             </div>
             <div class="value ac-token">
-                {{accessToken}}
+                <div class="copy-button">
+                    <button mat-stroked-button (click)="copyData()">
+                        <mat-icon>
+                            content_copy
+                        </mat-icon>
+                        Copy
+                    </button>
+                </div>
+                <div class="access-token-input">
+                    <input disabled [value]="accessToken" />
+                </div>
             </div>
         </div>
     </mat-card>

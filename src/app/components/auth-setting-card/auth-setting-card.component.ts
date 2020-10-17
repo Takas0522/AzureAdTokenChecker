@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountInfo } from '@azure/msal-browser';
 import { AppService } from 'src/app/app.service';
 import { AuthSetting, IAuthSetting } from 'src/app/models/auth-settings';
@@ -22,7 +23,8 @@ export class AuthSettingCardComponent implements OnInit {
   constructor(
     private appService: AppService,
     private matDialog: MatDialog,
-    private msalService: MsalService
+    private msalService: MsalService,
+    private matSnackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -59,5 +61,12 @@ export class AuthSettingCardComponent implements OnInit {
     const scopes: string[] = this.data.scopes.map(s => s.scope);
     const res = await this.msalService.acquireToken(scopes);
     this.accessToken = res.accessToken;
+  }
+
+  copyData(): void {
+    navigator.clipboard.writeText(this.accessToken);
+    this.matSnackBar.open('AccessToken Copy', 'Close', {
+      duration: 2000
+    });
   }
 }

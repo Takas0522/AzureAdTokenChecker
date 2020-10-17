@@ -17,15 +17,20 @@
     font-weight: bold;
 }
 .value {
-    font-size: 120%;
     padding-left: 10px;
+    grid-template-columns: 100px 1fr;
 }
 .contents {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 .ac-token {
-    word-wrap: break-word;
+    display: grid;
+    width: 100%;
+    input {
+        width: calc(100% - 10px);
+        height: calc(100% - 5px);
+    }
 }
 .login {
     grid-column: 1 / 2;
@@ -40,4 +45,14 @@
 }
 .edit {
     grid-column: 4 / 5;
+}
+.access-token-input {
+    line-height: 100%;
+    vertical-align: middle;
+}
+.copy-button {
+    width: 100%;
+    button {
+        width: 100%;
+    }
 }

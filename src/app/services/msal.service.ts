@@ -18,7 +18,7 @@ export class MsalService {
       alert('client not init');
       return;
     }
-    return this.client.loginPopup({ scopes }).then(
+    return this.client.loginPopup().then(
       res => {
         this.account = res.account;
         return res;

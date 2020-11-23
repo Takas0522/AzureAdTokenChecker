@@ -19,6 +19,7 @@ export class AuthSettingCardComponent implements OnInit {
   data: AuthSetting;
   account: AccountInfo | null = null;
   accessToken = '';
+  selectScopes = '';
 
   constructor(
     private appService: AppService,
@@ -58,8 +59,7 @@ export class AuthSettingCardComponent implements OnInit {
   }
 
   async acquireToken(): Promise<void> {
-    const scopes: string[] = this.data.scopes.map(s => s.scope);
-    const res = await this.msalService.acquireToken(scopes);
+    const res = await this.msalService.acquireToken([this.selectScopes]);
     this.accessToken = res.accessToken;
   }
 

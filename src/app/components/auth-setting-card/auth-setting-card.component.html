@@ -30,7 +30,7 @@
                 </div>
                 <div class="scopes">
                     <mat-form-field>
-                        <mat-select placeholder="SelectScopes">
+                        <mat-select placeholder="SelectScopes" [(value)]="selectScopes">
                             <ng-container *ngFor="let item of data.scopes">
                                 <mat-option [value]="item.scope">
                                     {{item.scope}}

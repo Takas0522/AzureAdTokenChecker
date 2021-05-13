@@ -9,6 +9,7 @@ export class AppService {
 
     private readonly AUTH_SETTNGS_KEY = 'authSettings';
 
+    // tslint:disable-next-line:variable-name
     private _datas: BehaviorSubject<AuthSetting[]> = new BehaviorSubject<AuthSetting[]>([]);
     get datas(): Observable<AuthSetting[]> {
         return this._datas.asObservable();

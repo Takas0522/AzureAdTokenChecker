@@ -7,9 +7,9 @@ import { AuthSetting } from './models/auth-settings';
 })
 export class AppService {
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     private readonly AUTH_SETTNGS_KEY = 'authSettings';
 
-    // tslint:disable-next-line:variable-name
     private _datas: BehaviorSubject<AuthSetting[]> = new BehaviorSubject<AuthSetting[]>([]);
     get datas(): Observable<AuthSetting[]> {
         return this._datas.asObservable();

@@ -31,9 +31,7 @@ export class MsalService {
       alert('client not init');
       return;
     }
-    return this.client.acquireTokenSilent({ scopes, account: this.account }).catch(err => {
-      return this.client.acquireTokenPopup({ scopes });
-    });
+    return this.client.acquireTokenSilent({ scopes, account: this.account }).catch(err => this.client.acquireTokenPopup({ scopes }));
   }
 
 }

@@ -13,19 +13,17 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
+  settings: AuthSetting[] = [];
+
   constructor(
     private matDialog: MatDialog,
     private service: AppService,
     private cd: ChangeDetectorRef
   ) {}
 
-  settings: AuthSetting[] = [];
-
   ngOnInit(): void {
     this.service.datas.subscribe(s => {
-      this.settings = s.map(m => {
-        return new AuthSetting(m);
-      });
+      this.settings = s.map(m => new AuthSetting(m) );
       this.cd.detectChanges();
     });
   }

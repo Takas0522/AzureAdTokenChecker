@@ -38,12 +38,6 @@ export class ClientRegisterComponent implements OnInit {
     });
   }
 
-  private genFormArray(data: AuthSetting | undefined): FormGroup[] {
-    if (this.isNewData) {
-      return [];
-    }
-    return this.data.scopes.map(f => this.formBuilder.group(f));
-  }
   addScopes(): void {
     const addGroups = this.formBuilder.group({
       scope: ['', Validators.required]
@@ -72,5 +66,11 @@ export class ClientRegisterComponent implements OnInit {
     this.dialogRef.close({ action: 'delete'});
   }
 
+  private genFormArray(data: AuthSetting | undefined): FormGroup[] {
+    if (this.isNewData) {
+      return [];
+    }
+    return this.data.scopes.map(f => this.formBuilder.group(f));
+  }
 
 }

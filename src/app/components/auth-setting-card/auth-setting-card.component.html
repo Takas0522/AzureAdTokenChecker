@@ -21,10 +21,10 @@
         <mat-card-actions>
             <div class="buttons-field">
                 <div class="login">
-                    <button mat-flat-button color="primary" (click)="login()" *ngIf="account == null">
+                    <button mat-flat-button color="primary" (click)="login()" *ngIf="account === null">
                         LogIn
                     </button>
-                    <button mat-flat-button color="primary" (click)="acquireToken()"  *ngIf="account != null">
+                    <button mat-flat-button color="primary" (click)="acquireToken()"  *ngIf="account !== null">
                         Get Token
                     </button>
                 </div>
